@@ -12,8 +12,19 @@
                 <v-icon right>exit_to_app</v-icon>
             </v-btn>
         </v-toolbar>
-        <v-navigation-drawer :clipped="clipped" app v-model="drawer" temporary enable-resize-watcher class="indigo">
-            <p>test</p>
+        <v-navigation-drawer :clipped="clipped" app v-model="drawer" temporary enable-resize-watcher class="primary">
+            <v-list>
+                <v-list-item v-for="link in links" :key="link.text" route :to="link.route">
+                    <v-list-tile-action>
+                        <v-icon left class="white--text">{{ link.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title class="white--text">
+                            {{link.text}}
+                        </v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-item>
+            </v-list>
         </v-navigation-drawer>
     </div>
 </template>
@@ -23,6 +34,11 @@
         data: () => ({
             drawer: false,
             group: null,
+            links: [
+                {icon: 'dashboard', text: 'Dashboard', route: '/' },
+                {icon: 'folder', text: 'My Progects', route: '/projects' },
+                {icon: 'person', text: 'Theam', route: '/team' },
+            ]
         }),
         watch: {
             group () {
